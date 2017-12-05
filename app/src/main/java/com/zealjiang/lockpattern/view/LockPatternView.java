@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -218,6 +219,7 @@ public class LockPatternView extends View {
         );
 
         canvas.rotate(RotateDegrees.getDegrees(a, b), a.getX(), a.getY());
+
         mMatrix.setScale(abInstance / mLineHeight, 1);
         mMatrix.postTranslate(a.getX(), a.getY());
         if (isLineState) {
@@ -336,4 +338,10 @@ public class LockPatternView extends View {
         this.mListener = listener;
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        Log.e("LockPatterView","onDetachedFromWindow");
+        isInitPoint = false;
+    }
 }
